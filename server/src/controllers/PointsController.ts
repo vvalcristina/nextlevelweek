@@ -8,7 +8,7 @@ class PointsController {
 
         const parsedItems = String(items)
             .split(',')
-            .map(item => Number(item.trim()));
+            .map((item) => Number(item.trim()));
 
         const points = await knex ('points')
             .join('point_items', 'points.id', '=', 'point_items.point_id')
@@ -22,7 +22,7 @@ class PointsController {
     }
 
     async show(request: Request, response: Response){
-        const { id } = request.params;
+        const id = request.params;
 
         const point = await knex('points').where('id', id).first();
 
@@ -59,7 +59,7 @@ class PointsController {
             latitude,
             longitude,
             city,
-            uf
+            uf,
         };
     
         const insertedIds = await trx('points').insert(point);
